@@ -5,12 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countries</title>
+    <style>
+        .heading{
+            text-align: center;
+        }
+       #all-countries {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap:12px;
+    }
+    .country {
+        border:2px solid tomato;
+        padding:10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    </style>
 </head>
 <body>
-    <h2>All Countries</h2>
+    <h2 class="heading">All Countries</h2>
+    <section id="country-detail">
+        <!-- <h2>Country Details</h2>
+        <h3>Name: </h3>
+        <p>Capital: </p>
+        <img src="" alt=""> -->
+    </section>
     <section>
         <div id="all-countries">
-            
+
         </div>
     </section>
 
