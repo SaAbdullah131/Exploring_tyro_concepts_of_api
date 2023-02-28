@@ -37,6 +37,7 @@ const displayPhones = (phones,dataLimit)=>{
                 <div class="card-body">
                     <h5 class="card-title">${phone.phone_name}</h5>
                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                     <button onclick="loadPhoneDetails('${phone.slug}' )" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>
                 </div>
             </div>
         </div>
@@ -62,6 +63,14 @@ document.getElementById("btn-search").addEventListener("click",function(){
     // start loader
     processSearch(10);
 })
+
+//search  input field enter key handler
+document.getElementById("search-field").addEventListener('keypress',function(e){
+    // console.log(e.key);
+    if(e.key==='Enter'){
+        processSearch(10);
+    }
+})
 const toggleSpinner = isLoading => {
     const loaderSection= document.getElementById("loader");
     if(isLoading) {
@@ -74,6 +83,24 @@ const toggleSpinner = isLoading => {
 document.getElementById("btn-show-all").addEventListener("click",function() {
     processSearch();
 })
+const loadPhoneDetails= async id=>{
+    const url=`https://openapi.programming-hero.com/api/phone/${id}`;
+    const res =await fetch(url);
+    const data = await res.json();
+    displayPhoneDetails(data.data);
+}
+const displayPhoneDetails = phone => {
+    console.log(phone);
+    const modalTitle = document.getElementById("phoneDetailModalLabel");
+    modalTitle.innerText = phone.name;
+    const phoneDetails = document.getElementById("phone-details");
+    phoneDetails.innerHTML = ` 
+    <p>Release Data; ${phone.releaseDate ? phone.releaseDate:"No Release Date Found"}</p>
+    <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage:"No storage information found"}</p>
+    <p>Others: ${phone.others ? phone.others.Bluetooth: "NO Bluetooth Information"}</p>
+    `
+}
+
 // const toggleSpinner = isLoading=> {
 //     const loaderSection = document.getElementById("loader");
 //     if(isLoading) {
@@ -84,4 +111,4 @@ document.getElementById("btn-show-all").addEventListener("click",function() {
 //     }
 // }
 
-//  loadPhones();
+  loadPhones('apple');
