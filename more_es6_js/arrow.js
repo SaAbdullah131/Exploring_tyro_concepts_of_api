@@ -16,10 +16,13 @@ var javascript = {
     name:'javascript',
     libraries:['React','Angular',"vue"],
     printLibraries: function(){
-        console.log(this)
-        this.libraries.forEach(function(a){
-            console.log(`${this.name} Loves ${a}`);
-        })
+        // console.log(this)
+        // var self =this; before arrow function
+        // this.libraries.forEach(function(a){
+        //     // console.log(this);
+        //     console.log(`${self.name} Loves ${a}`);
+        // }) convert this function to arrow
+        this.libraries.forEach((a)=>console.log(`${this.name} loves ${a}`));
     }
 }
 javascript.printLibraries();
